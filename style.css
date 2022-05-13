@@ -1,0 +1,167 @@
+body {
+    color: #404040;
+    font: 400 15px/22px 'Montserrat', 'Helvetica Neue', sans-serif;
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+  }
+
+
+  .sidebar {
+    position: absolute;
+    width: 20%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    border-right: 1px solid rgba(0, 0, 0, 0.25);
+  }
+
+  .rainbow {
+    font-family: sans-serif;
+    background: linear-gradient(to right, #ef5350, #f48fb1, #7e57c2, #2196f3, #26c6da, #43a047, #eeff41, #f9a825, #ff5722);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .footer {
+    position: absolute;
+    bottom: 0;
+    background-color: orange;
+    width: 100%;
+    height: 4.5rem;
+    text-align: center;
+  }
+
+  .map {
+    position: absolute;
+    left: 20%;
+    width: 100%;
+    top: 0;
+    bottom: 7.5%;
+  }
+
+  .heartIcon {
+    color: red;
+  }
+
+  .textFooter {
+    color: white;
+    text-decoration: none;
+  }
+
+  h1 {
+    font-size: 22px;
+    margin: 0;
+    font-weight: bolder;
+    line-height: 20px;
+    padding: 20px 2px;
+  }
+
+  a {
+    color: #404040;
+  }
+
+  a:hover {
+    color: #101010;
+  }
+
+  .heading {
+    background: #fff;
+    border-bottom: 1px solid #eee;
+    min-height: 60px;
+    line-height: 60px;
+    padding: 0 10px;
+    background-color: #e48913; 
+    color: #fff;
+  }
+
+  .nom {
+    height: 85%;
+    overflow: auto;
+    padding-bottom: 60px;
+  }
+
+  .listings .item {
+    display: block;
+    border-bottom: 1px solid #eee;
+    padding: 10px;
+    text-decoration: none;
+  }
+
+  .listings .item:last-child {
+    border-bottom: none;
+  }
+  .listings .item .title {
+    display: block;
+    color: #e48913;
+    font-weight: 700;
+  }
+
+  .listings .item .title small {
+    font-weight: 400;
+  }
+  .listings .item.active .title,
+  .listings .item .title:hover {
+    color: #8cc63f;
+  }
+  .listings .item.active {
+    background-color: #f8f8f8;
+  }
+  ::-webkit-scrollbar {
+    width: 3px;
+    height: 3px;
+    border-left: 0;
+    background: rgba(0, 0, 0, 0.1);
+  }
+  ::-webkit-scrollbar-track {
+    background: none;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #e48913;
+    border-radius: 0;
+  }
+
+  .marker {
+    border: none;
+    cursor: pointer;
+    height: 26px;
+    width: 26px;
+    background-image: url(marker2.png);
+  }
+
+  /* Marker tweaks */
+  .mapboxgl-popup {
+    padding-bottom: 50px;
+  }
+
+  .mapboxgl-popup-close-button {
+    display: none;
+  }
+  .mapboxgl-popup-content {
+    font: 400 15px/22px 'Montserrat', 'Helvetica Neue', sans-serif;
+    padding: 0;
+    width: 180px;
+  }
+  .mapboxgl-popup-content h3 {
+    background: #e48913;
+    color: #fff;
+    margin: 0;
+    padding: 10px;
+    border-radius: 3px 3px 0 0;
+    font-weight: 700;
+    margin-top: -15px;
+  }
+
+  .mapboxgl-popup-content h4 {
+    margin: 0;
+    font-weight: 400;
+  }
+
+  .mapboxgl-popup-anchor-top > .mapboxgl-popup-content {
+    margin-top: 15px;
+  }
+
+  .mapboxgl-popup-anchor-top > .mapboxgl-popup-tip {
+    border-bottom-color: #91c949;
+  }

@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Pride 2022 France</title>
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js"></script>
+    <link
+      href="https://api.tiles.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css"
+      rel="stylesheet"
+    />
+   <script src="https://js.sentry-cdn.com/9c5feb5b248b49f79a585804c259febc.min.js" crossorigin="anonymous"></script>
+   <link rel="stylesheet" media="screen" type="text/css" href="style.css"/>
+    </head>
+  <body>
+    <div class="sidebar">
+      <div class="heading">
+        <h1>Trouves ta pride</h1>
+      </div>
+      <div id="nom" class="nom"></div>
+    </div>
+
+    <div id="map" class="map"></div>
+    <script>
+      mapboxgl.accessToken = 'pk.eyJ1IjoibG91Ym9vdCIsImEiOiJja21nazF1ZXowYTNoMnVtb3V5Mnp0cjFhIn0.AyCpp3azkLdbXa1Rb6VDhA';
+
+      /**
+       * Add the map to the page
+       */
+      const map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/light-v10',
+        center: [2.566942,46.924183],
+        zoom: 5
+      });
+
+      const villes = {
+"type": "FeatureCollection",
+"name": "villes_ok",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "id": null, "nom": "Paris", "date": "25/06/2022", "site": "https://tetu.com/2022/03/21/agenda-marche-des-fiertes-paris-banlieue-ile-de-france-date-parcours-gay-lgbt-pride-juin-2022-inter/", "heure": null }, "geometry": { "type": "Point", "coordinates": [ 2.345264434525258, 48.859148980419519 ] } },
+{ "type": "Feature", "properties": { "id": null, "nom": "Rennes", "date": "04/06/2022", "site": "https://iskis.org/2021/05/28/marche-des-fiertes-appel-a-manifester/", "heure": null }, "geometry": { "type": "Point", "coordinates": [ -1.674128029031453, 48.11097783209982 ] } },
+{ "type": "Feature", "properties": { "id": null, "nom": "Lille", "date": "04/06/2022", "site": "https://www.lillepride.fr/", "heure": "14" }, "geometry": { "type": "Point", "coordinates": [ 3.061874845395468, 50.634628396785658 ] } },
+{ "type": "Feature", "properties": { "id": null, "nom": "Lyon", "date": "11/06/2022", "site": "https://www.gaytravel4u.fr/event/la-marche-des-fiertes-lyon-pride", "heure": null }, "geometry": { "type": "Point", "coordinates": [ 4.839300452086881, 45.760232503200299 ] } },
+{ "type": "Feature", "properties": { "id": null, "nom": "Marseille", "date": "02/07/2022", "site": "https://www.pride-marseille.com/", "heure": null }, "geometry": { "type": "Point", "coordinates": [ 5.377820620686713, 43.297601256374179 ] } },
+{ "type": "Feature", "properties": { "id": null, "nom": "Strasbourg", "date": "18/06/2022", "site": "https://www.facebook.com/events/473262477833337?ref=newsfeed", "heure": "14" }, "geometry": { "type": "Point", "coordinates": [ 7.744952853897239, 48.585500379256082 ] } },
+{ "type": "Feature", "properties": { "id": null, "nom": "Metz", "date": "18/06/2022", "site": "https://www.facebook.com/events/769630844011386/?ref=newsfeed", "heure": "15:30" }, "geometry": { "type": "Point", "coordinates": [ 6.175846473115055, 49.119680648292672 ] } },
+{ "type": "Feature", "properties": { "id": null, "nom": "Arras", "date": "11/06/2022", "site": "https://www.facebook.com/events/1202748050467920/?privacy_mutation_token=eyJ0eXBlIjowLCJjcmVhdGlvbl90aW1lIjoxNjUxMTc1NzQ5LCJjYWxsc2l0ZV9pZCI6MzU5MDM2MDAxOTY4NDMyfQ%3D%3D&acontext=%7B%22action_history%22%3A%22null%22%7D", "heure": "14" }, "geometry": { "type": "Point", "coordinates": [ 2.777113956386039, 50.291267506194679 ] } },
+{ "type": "Feature", "properties": { "id": null, "nom": "Rouen", "date": "18/06/2022", "site": "https://www.facebook.com/fiertescolorees/", "heure": null }, "geometry": { "type": "Point", "coordinates": [ 1.092451732395512, 49.438454192907727 ] } },
+{ "type": "Feature", "properties": { "id": null, "nom": "Caen", "date": "18/06/2022", "site": "https://www.centrelgbt-normandie.fr/actions/lesbian-gay-pride-de-caen/", "heure": null }, "geometry": { "type": "Point", "coordinates": [ -0.364623910299191, 49.178335136373988 ] } },
+{ "type": "Feature", "properties": { "id": null, "nom": "Alençon", "date": "21/05/2022", "site": "https://www.facebook.com/Ornen-Ciel-508203485893997/", "heure": null }, "geometry": { "type": "Point", "coordinates": [ 0.089462747289449, 48.431170793382194 ] } },
+{ "type": "Feature", "properties": { "id": null, "nom": "Angers", "date": "14/05/2022", "site": "https://quazar.fr/pride-angers-2022/", "heure": null }, "geometry": { "type": "Point", "coordinates": [ -0.554400117490489, 47.473576321855063 ] } },
+{ "type": "Feature", "properties": { "id": null, "nom": "Saint-Brieuc", "date": "21/05/2022", "site": "https://22.snuipp.fr/article/marche-des-fiertes-samedi-21-mai-a-saint-brieuc", "heure": null }, "geometry": { "type": "Point", "coordinates": [ -2.759860406254079, 48.510793681722312 ] } },
+{ "type": "Feature", "properties": { "id": null, "nom": "Saint-Nazaire", "date": "21/05/2022", "site": "https://queeramann.fr/pride/", "heure": "15" }, "geometry": { "type": "Point", "coordinates": [ -2.216173302751074, 47.273734254967152 ] } },
+{ "type": "Feature", "properties": { "id": null, "nom": "La Rochelle", "date": "04/06/2022", "site": "https://larochellepride.wordpress.com/", "heure": null }, "geometry": { "type": "Point", "coordinates": [ -1.149370257135265, 46.161001916754955 ] } },
+{ "type": "Feature", "properties": { "id": null, "nom": "Nantes", "date": "11/06/2022", "site": "https://www.evous.fr/Gay-Pride-de-Nantes,1191039.html", "heure": null }, "geometry": { "type": "Point", "coordinates": [ -1.550942506245397, 47.215907009135748 ] } },
+{ "type": "Feature", "properties": { "id": null, "nom": "Tours", "date": "18/06/2022", "site": "https://mobilizon.connection.fr/events/f46da804-28bb-48c2-96fc-af36567f4286", "heure": null }, "geometry": { "type": "Point", "coordinates": [ 0.688271871278168, 47.390180158087297 ] } },
+{ "type": "Feature", "properties": { "id": null, "nom": "Laval", "date": "18/06/2022", "site": "https://www.ouest-france.fr/pays-de-la-loire/laval-53000/une-premiere-marche-des-fiertes-organisee-en-juin-2022-a-laval-85ccdb5c-843a-11ec-8ed3-a057c5cdc844", "heure": null }, "geometry": { "type": "Point", "coordinates": [ -0.773367092429152, 48.071030409592488 ] } },
+{ "type": "Feature", "properties": { "id": null, "nom": "Le Mans", "date": "02/07/2022", "site": "https://homogene72.net/pride-de-louest-2022/", "heure": null }, "geometry": { "type": "Point", "coordinates": [ 0.198402982257273, 48.00739243724496 ] } },
+{ "type": "Feature", "properties": { "id": null, "nom": "La Roche-sur-Yon", "date": "10/09/2022", "site": "https://www.gaypride.fr/la-premiere-marche-de-la-roche-sur-yon/", "heure": null }, "geometry": { "type": "Point", "coordinates": [ -1.427515537904191, 46.670009230699605 ] } },
+{ "type": "Feature", "properties": { "id": null, "nom": "Châlons-en-Champagne", "date": "02/04/2022", "site": "https://www.gaypride.fr/event/pride-chalons-en-champagne-02-04-2022/", "heure": null }, "geometry": { "type": "Point", "coordinates": [ 4.361817720100225, 48.957285452564385 ] } },
+{ "type": "Feature", "properties": { "id": null, "nom": "Quimper", "date": "02/07/2022", "site": "https://www.ouest-france.fr/bretagne/quimper-29000/quimper-la-premiere-marche-des-fiertes-le-samedi-2-juillet-bee11eaa-94c3-11ec-bde8-dbba9f3f1962", "heure": null }, "geometry": { "type": "Point", "coordinates": [ -4.10075244729427, 47.995809044304394 ] } },
+{ "type": "Feature", "properties": { "id": null, "nom": "Lorient", "date": "18/06/2022", "site": "https://www.facebook.com/events/2248985901932278/?ref=newsfeed", "heure": null }, "geometry": { "type": "Point", "coordinates": [ -3.365695595928898, 47.749083399288587 ] } },
+{ "type": "Feature", "properties": { "id": null, "nom": "Bordeaux", "date": "12/06/2022", "site": "https://www.facebook.com/events/1024811448375738/?ref=newsfeed", "heure": null }, "geometry": { "type": "Point", "coordinates": [ -0.574826411546971, 44.840597595098657 ] } },
+{ "type": "Feature", "properties": { "id": null, "nom": "Toulouse", "date": "02/07/2022", "site": "https://pridetoulouse.com/", "heure": null }, "geometry": { "type": "Point", "coordinates": [ 1.442740945363862, 43.604516072260104 ] } },
+{ "type": "Feature", "properties": { "id": null, "nom": "Poitiers", "date": "21/05/2022", "site": "https://www.facebook.com/centrelgbtidupoitou/", "heure": null }, "geometry": { "type": "Point", "coordinates": [ 0.341024872318205, 46.581513615916144 ] } },
+{ "type": "Feature", "properties": { "id": null, "nom": "Montpellier", "date": "25/06/2022", "site": "https://www.fiertemontpellierpride.com/", "heure": null }, "geometry": { "type": "Point", "coordinates": [ 3.876367284758206, 43.608816858362985 ] } },
+{ "type": "Feature", "properties": { "id": null, "nom": "Grenoble", "date": "28/05/2022", "site": "https://www.facebook.com/GrenoblePride/", "heure": null }, "geometry": { "type": "Point", "coordinates": [ 5.731591656032847, 45.186368603252276 ] } },
+{ "type": "Feature", "properties": { "id": null, "nom": "Tignes", "date": "17/03/2022", "site": "https://www.tignes.net/agenda/evenements/european-snowpride-gay-pride", "heure": null }, "geometry": { "type": "Point", "coordinates": [ 6.907960176234946, 45.469623395829565 ] } },
+{ "type": "Feature", "properties": { "id": null, "nom": "Vic-en-Bigorre", "date": "09/04/2022", "site": "https://www.gaypride.fr/event/marche-des-fiertes-vic-en-bigorre-9-avril-2022/", "heure": null }, "geometry": { "type": "Point", "coordinates": [ 0.054818994632544, 43.386059474442604 ] } },
+{ "type": "Feature", "properties": { "id": null, "nom": "Cherbourg", "date": "09/04/2022", "site": "https://www.centrelgbt-normandie.fr/actions/lesbian-gay-pride-de-caen/", "heure": null }, "geometry": { "type": "Point", "coordinates": [ -1.623495227777978, 49.642041669932169 ] } },
+{ "type": "Feature", "properties": { "id": null, "nom": "Le Havre", "date": "11/06/2022", "site": "https://www.gaypride.fr/category/events/gaypride/pride-2022/", "heure": null }, "geometry": { "type": "Point", "coordinates": [ 0.111978051336914, 49.493479751405239 ] } },
+{ "type": "Feature", "properties": { "id": null, "nom": "Rodez", "date": "21/05/2022", "site": "https://www.centrepresseaveyron.fr/2022/04/06/la-toute-premiere-marche-des-fiertes-organisee-a-rodez-se-prepare-pour-le-mois-de-mai-10218407.php", "heure": null }, "geometry": { "type": "Point", "coordinates": [ 2.573709170081411, 44.352382048358429 ] } },
+{ "type": "Feature", "properties": { "id": null, "nom": "Villefranche-de-Rouergue", "date": "14/05/2022", "site": "https://www.gaypride.fr/event/marche-des-fiertes-villefranche-de-rouergue-14-mai-2022/", "heure": null }, "geometry": { "type": "Point", "coordinates": [ 2.036738343765012, 44.351338503561436 ] } },
+{ "type": "Feature", "properties": { "id": null, "nom": "Orléans", "date": "14/05/2022", "site": "https://www.gaypride.fr/event/orleans/", "heure": null }, "geometry": { "type": "Point", "coordinates": [ 1.908475042053928, 47.901913702745155 ] } },
+{ "type": "Feature", "properties": { "id": null, "nom": "Reims", "date": "21/05/2022", "site": "https://www.leetchi.com/c/pride-reims-2022", "heure": null }, "geometry": { "type": "Point", "coordinates": [ 4.029927350886019, 49.258572144032797 ] } },
+{ "type": "Feature", "properties": { "id": null, "nom": "Saint-Denis", "date": "21/05/2022", "site": "https://www.gaypride.fr/category/events/gaypride/pride-2022/", "heure": null }, "geometry": { "type": "Point", "coordinates": [ 55.448228383573451, -20.87945881473328 ] } },
+{ "type": "Feature", "properties": { "id": null, "nom": "Valence", "date": "21/05/2022", "site": "https://www.facebook.com/ValenceDiversiteLGBTQI/", "heure": null }, "geometry": { "type": "Point", "coordinates": [ 4.892258878698668, 44.933675868339151 ] } },
+{ "type": "Feature", "properties": { "id": null, "nom": "Clermont-Ferrand", "date": "04/06/2022", "site": "https://www.gaypride.fr/event/clermont-ferrand-19-juin/", "heure": null }, "geometry": { "type": "Point", "coordinates": [ 3.086681300249896, 45.77708353605459 ] } },
+{ "type": "Feature", "properties": { "id": null, "nom": "Nancy", "date": "04/06/2022", "site": "https://equinoxe54.com/pride/", "heure": null }, "geometry": { "type": "Point", "coordinates": [ 6.183810330188964, 48.693900617445536 ] } },
+{ "type": "Feature", "properties": { "id": null, "nom": "St-Denis", "date": "04/06/2022", "site": "https://www.parislgbt.com/listing/pride-des-banlieues-4-juin-2022/", "heure": null }, "geometry": { "type": "Point", "coordinates": [ 2.355693987843335, 48.935643651335532 ] } },
+{ "type": "Feature", "properties": { "id": null, "nom": "Compiègne", "date": "11/06/2022", "site": "https://www.facebook.com/events/s/marche-des-fiertes-de-compiegn/317886553801387/", "heure": null }, "geometry": { "type": "Point", "coordinates": [ 2.824803636200073, 49.418484202585979 ] } },
+{ "type": "Feature", "properties": { "id": null, "nom": "Mende", "date": "11/06/2022", "site": "https://www.gaypride.fr/category/events/gaypride/pride-2022/", "heure": null }, "geometry": { "type": "Point", "coordinates": [ 3.499158890297408, 44.518676311266468 ] } },
+{ "type": "Feature", "properties": { "id": null, "nom": "Ancenis", "date": "18/06/2022", "site": "https://www.facebook.com/events/495416945279341?acontext=%7B%22event_action_history%22%3A[%7B%22surface%22%3A%22page%22%7D]%7D", "heure": null }, "geometry": { "type": "Point", "coordinates": [ -1.179005863419843, 47.365349617078934 ] } },
+{ "type": "Feature", "properties": { "id": null, "nom": "Gap", "date": "18/06/2022", "site": "https://www.gaypride.fr/event/gap-11-septembre/", "heure": null }, "geometry": { "type": "Point", "coordinates": [ 6.082221254939917, 44.561352948780296 ] } },
+{ "type": "Feature", "properties": { "id": null, "nom": "Saint-Quentin", "date": "18/06/2022", "site": "https://www.aisnenouvelle.fr/id296842/article/2022-04-12/une-premiere-marche-des-fiertes-en-juin-saint-quentin", "heure": null }, "geometry": { "type": "Point", "coordinates": [ 3.290021604100351, 49.845881482850487 ] } },
+{ "type": "Feature", "properties": { "id": null, "nom": "Vannes", "date": "09/07/2022", "site": "https://boutique-lgbtqia.fr/gay-pride-2022/", "heure": null }, "geometry": { "type": "Point", "coordinates": [ -2.758784898717292, 47.658435828974092 ] } },
+{ "type": "Feature", "properties": { "id": null, "nom": "Annecy", "date": "16/07/2022", "site": "https://www.instagram.com/annecypride/", "heure": null }, "geometry": { "type": "Point", "coordinates": [ 6.127705270274886, 45.90151759460467 ] } },
+{ "type": "Feature", "properties": { "id": null, "nom": "Épernay", "date": "23/08/2022", "site": "https://abonne.lunion.fr/id340420/article/2022-02-09/une-marche-arc-en-ciel-pour-soutenir-la-communaute-lgbtq-en-juillet-dans-le", "heure": null }, "geometry": { "type": "Point", "coordinates": [ 3.956796188975189, 49.043484512838319 ] } },
+{ "type": "Feature", "properties": { "id": null, "nom": "Pau", "date": "24/09/2022", "site": "https://tetu.com/2022/03/28/agenda-printemps-ete-2022-lgbt-marche-fiertes-lesbienne-gay-pride-banlieues-calendrier-date-ville-france/", "heure": null }, "geometry": { "type": "Point", "coordinates": [ -0.369049868417455, 43.295310984557261 ] } },
+{ "type": "Feature", "properties": { "id": null, "nom": "Ajaccio", "date": "14/05/2022", "site": "https://www.corsematin.com/articles/la-journee-de-lutte-contre-lhomophobie-celebree-le-14-mai-a-ajaccio-125150", "heure": null }, "geometry": { "type": "Point", "coordinates": [ 8.739728631139766, 41.925898582874993 ] } },
+{ "type": "Feature", "properties": { "id": null, "nom": "Amiens", "date": "02/07/2022", "site": "https://www.mygayprides.com/calendrier-des-gay-prides-de-france-2022/", "heure": null }, "geometry": { "type": "Point", "coordinates": [ 2.295373997904257, 49.895360005702507 ] } },
+{ "type": "Feature", "properties": { "id": null, "nom": "Arles", "date": "18/06/2022", "site": "https://www.instagram.com/queerteam_arles/?hl=fr", "heure": null }, "geometry": { "type": "Point", "coordinates": [ 4.629166698379155, 43.678516869404831 ] } },
+{ "type": "Feature", "properties": { "id": null, "nom": "Biarritz", "date": "25/06/2022", "site": "https://www.gaypride.fr/category/events/gaypride/pride-2022/?fbclid=IwAR2NhzpkdfhZ95-XGCt7Ko1CZnTp4NqOhK45QDOmuUVCKQ5EXZ1_3wFwK6o", "heure": null }, "geometry": { "type": "Point", "coordinates": [ -1.558716277114842, 43.482266577615 ] } },
+{ "type": "Feature", "properties": { "id": null, "nom": "Bourges", "date": "25/06/2022", "site": "https://www.facebook.com/BerryLGBT/?ref=page_internal", "heure": null }, "geometry": { "type": "Point", "coordinates": [ 2.39797435334889, 47.086108112615022 ] } },
+{ "type": "Feature", "properties": { "id": null, "nom": "Nevers", "date": "28/05/2022", "site": "https://www.komitid.fr/2022/05/09/marche-fiertes-lgbt-2022-les-dates-a-connaitre/", "heure": null }, "geometry": { "type": "Point", "coordinates": [ 3.158444680196883, 46.988811914177106 ] } },
+{ "type": "Feature", "properties": { "id": null, "nom": "Périgueux", "date": "04/06/2022", "site": "https://www.facebook.com/LGBT.Dordogne/events/?ref=page_internal", "heure": null }, "geometry": { "type": "Point", "coordinates": [ 0.721642392091248, 45.188816596319242 ] } },
+{ "type": "Feature", "properties": { "id": null, "nom": "Troyes", "date": "04/06/2022", "site": "https://www.lest-eclair.fr/id371109/article/2022-05-13/discriminations-lgbt-des-evenements-pour-sensibiliser?fbclid=IwAR14kBnGpL5Y10brFVX-uZutgh875rybaBFnep5YzWfP27fucipmLh9G_Zg", "heure": null }, "geometry": { "type": "Point", "coordinates": [ 4.078632483440072, 48.293933163799416 ] } },
+{ "type": "Feature", "properties": { "id": null, "nom": "Perpignan", "date": "17/05/2022", "site": "https://twitter.com/LGBT66/status/1524919896802484224?s=20&t=w3ZhMR_Uu45AqpWZbajHHQ&fbclid=IwAR1869xqMXyUeFXuu169d3CCDbpGupwpmGbxFQHg6B9nu_NzGgf4Bmqh7hU", "heure": null }, "geometry": { "type": "Point", "coordinates": [ 2.895820580450296, 42.700095524673202 ] } }
+]
+};
+
+      villes.features.sort(function (a, b) {
+    if (a.properties.nom < b.properties.nom)
+        return -1;
+    else if (a.properties.nom > b.properties.nom)
+        return 1;
+    });
+      
+      /**
+       * Assign a unique id to each ville. You'll use this `id`
+       * later to associate each point on the map with a noms
+       * in the sidebar.
+       */
+       villes.features.forEach((ville, i) => {
+        ville.properties.id = i;
+      });
+
+      /**
+       * Wait until the map loads to make changes to the map.
+       */
+      map.on('load', () => {
+        /**
+         * This is where your '.addLayer()' used to be, instead
+         * add only the source without styling a layer
+         */
+        map.addSource('villes', {
+          'type': 'geojson',
+          'data': villes
+        });
+
+        /**
+         * Add all the things to the page:
+         * - The location nom on the side of the page
+         * - The markers onto the map
+         */
+        buildLocationList(villes);
+        addMarkers();
+      });
+
+      /**
+       * Add a marker to the map for every ville noms.
+       **/
+      function addMarkers() {
+        /* For each feature in the GeoJSON object above: */
+        for (const marker of villes.features) {
+          /* Create a div element for the marker. */
+          const el = document.createElement('div');
+          /* Assign a unique `id` to the marker. */
+          el.id = `marker-${marker.properties.id}`;
+          /* Assign the `marker` class to each marker for styling. */
+          el.className = 'marker';
+
+          /**
+           * Create a marker using the div element
+           * defined above and add it to the map.
+           **/
+          new mapboxgl.Marker(el, { offset: [0, -23] })
+            .setLngLat(marker.geometry.coordinates)
+            .addTo(map);
+
+          /**
+           * Listen to the element and when it is clicked, do three things:
+           * 1. Fly to the point
+           * 2. Close all other popups and display popup for clicked ville
+           * 3. Highlight noms in sidebar (and remove highlight for all other nom)
+           **/
+          el.addEventListener('click', (e) => {
+            /* Fly to the point */
+            flyToville(marker);
+            /* Close all other popups and display popup for clicked ville */
+            createPopUp(marker);
+            /* Highlight noms in sidebar */
+            const activeItem = document.getElementsByClassName('active');
+            e.stopPropagation();
+            if (activeItem[0]) {
+              activeItem[0].classList.remove('active');
+            }
+            const noms = document.getElementById(
+              `noms-${marker.properties.id}`
+            );
+            noms.classList.add('active');
+          });
+        }
+      }
+
+      /**
+       * Add a noms for each ville to the sidebar.
+       **/
+      function buildLocationList(villes) {
+        for (const ville of villes.features) {
+          /* Add a new noms section to the sidebar. */
+          const nom = document.getElementById('nom');
+          const noms = nom.appendChild(document.createElement('div'));
+          /* Assign a unique `id` to the noms. */
+          noms.id = `noms-${ville.properties.id}`;
+          /* Assign the `item` class to each noms for styling. */
+          noms.className = 'item';
+
+          /* Add the link to the individual noms created above. La ou on change le nom */
+          const link = noms.appendChild(document.createElement('a'));
+          link.href = '#';
+          link.className = 'title';
+          link.id = `link-${ville.properties.id}`;
+          link.innerHTML = `${ville.properties.nom}`;
+
+          /* Add details to the individual noms. La ou on change l'date */
+          const details = noms.appendChild(document.createElement('div'));
+          details.innerHTML = `${ville.properties.date}`;
+          
+
+          /**
+           * Listen to the element and when it is clicked, do four things:
+           * 1. Update the `currentFeature` to the ville associated with the clicked link
+           * 2. Fly to the point
+           * 3. Close all other popups and display popup for clicked ville
+           * 4. Highlight noms in sidebar (and remove highlight for all other nom)
+           **/
+          link.addEventListener('click', function () {
+            for (const feature of villes.features) {
+              if (this.id === `link-${feature.properties.id}`) {
+                flyToville(feature);
+                createPopUp(feature);
+              }
+            }
+            const activeItem = document.getElementsByClassName('active');
+            if (activeItem[0]) {
+              activeItem[0].classList.remove('active');
+            }
+            this.parentNode.classList.add('active');
+          });
+        }
+      }
+
+      /**
+       * Use Mapbox GL JS's `flyTo` to move the camera smoothly
+       * a given center point.
+       **/
+      function flyToville(currentFeature) {
+        map.flyTo({
+          center: currentFeature.geometry.coordinates,
+          zoom: 10
+        });
+      }
+
+      /**
+       * Create a Mapbox GL JS `Popup`. currentFeature.properties.type => pour que ca soit dynamique en fonction d une variable du geojson
+       **/
+      const lien = document.getElementsByClassName('site')
+      function createPopUp(currentFeature) {
+        const popUps = document.getElementsByClassName('mapboxgl-popup');
+        if (popUps[0]) popUps[0].remove();
+        const popup = new mapboxgl.Popup({ closeOnClick: true })
+          .setLngLat(currentFeature.geometry.coordinates)
+          .setHTML(
+            `<h3>${currentFeature.properties.nom}</h3><h4>${currentFeature.properties.date}</h4>
+            <h4><a href="${currentFeature.properties.site}" target="_blank"> Lien </a></h4>`
+          )
+          .addTo(map);
+      }
+    </script>
+  </body>
+  <footer class="footer">
+    <div class="textFooter">
+      Fait avec <span class="heartIcon"> &hearts; </span> par <a class="textFooter rainbow" href="https://twitter.com/louhennenfent" target="_blank">Lou</a> et <a class="textFooter rainbow" href="https://twitter.com/KLNZRG" target="_blank">Killian</a> 
+    </div>
+    <div class="textFooter">
+      Cette page web est possible grâce à <a class="textFooter" href="https://maplibre.org/">MapLibre</a>
+    </div>
+  </footer>
+</html>
