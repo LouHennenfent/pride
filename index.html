@@ -5,7 +5,7 @@
     <title>Pride 2022 France</title>
     <meta name="robots" content="noindex, nofollow" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    </script><script src="https://api.tiles.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js"></script>
+    <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js"></script>
     <link
       href="https://api.tiles.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css"
       rel="stylesheet"
@@ -93,6 +93,14 @@
 { "type": "Feature", "properties": { "id": null, "nom": "Pau", "date": "24\/09\/2022", "site": null, "heure": null }, "geometry": { "type": "Point", "coordinates": [ -0.369049868417455, 43.295310984557261 ] } }
 ]
       };
+
+      function alphabeticalOrder(villes) {
+        for (const ville of villes) {
+          villes[features][properties][nom].sort(function(a,b) {
+          return a === b ? 0 : a > b ? 1 : -1;
+        })
+      }}
+      console.log(villes)
 
       /**
        * Assign a unique id to each ville. You'll use this `id`
